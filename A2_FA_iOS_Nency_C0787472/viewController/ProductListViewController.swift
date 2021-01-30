@@ -31,7 +31,7 @@ class ProductListViewController: UITableViewController {
     // MARK: - load Data
     func loadData(){
         let request: NSFetchRequest<Product> = Product.fetchRequest()
-        
+        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         do {
             productList = try context.fetch(request)
         } catch {
