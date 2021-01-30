@@ -15,7 +15,7 @@ class ProductListViewCell: UITableViewCell{
     
     func initCell(_ product: Product){
         productName.text = product.name
-        productPrice.text = String(format: "%.2f", product.price)
+        productPrice.text = String(format: "$ %.2f", product.price)
         productProvider.text = product.provider?.name ?? ""
     }
 }

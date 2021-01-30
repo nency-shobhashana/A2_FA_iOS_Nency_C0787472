@@ -19,25 +19,13 @@ class ProductListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        deleteProvider()
         staticDataEntry()
         productSearchBar.delegate = self
         
-    }
-    
-    // MARK: - load Data
-    func deleteProvider(){
-        print("number of provider :")
-        let request: NSFetchRequest<Provider> = Provider.fetchRequest()
-        
-        do {
-            let providerList = try context.fetch(request)
-            providerList.forEach { (provider) in
-                context.delete(provider)
-            }
-        } catch {
-            print("Error loading products \(error.localizedDescription)")
-        }
+        //MARK: - to dispaly first product
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+        performSegue(withIdentifier: "productDetail", sender: self)
     }
     
     // MARK: - load Data
@@ -85,7 +73,9 @@ class ProductListViewController: UITableViewController {
         return cell
     }
     
+    // MARK: - Static data entry
     func staticDataEntry(){
+        deleteProvider()
         productList.forEach { (product) in
             context.delete(product)
         }
@@ -125,7 +115,55 @@ class ProductListViewController: UITableViewController {
         product.id = 4
         product.name = "Forth Product"
         product.desc = "Small description for Forth Produ1"
-        product.price = 3.5
+        product.price = 9.5
+        product.provider = provider2
+        productList.append(product)
+        
+        product = Product(context: context)
+        product.id = 5
+        product.name = "Fifth Product"
+        product.desc = "Small description for Fifth Pro1"
+        product.price = 35.7
+        product.provider = provider1
+        productList.append(product)
+        
+        product = Product(context: context)
+        product.id = 6
+        product.name = "Six Product"
+        product.desc = "Small description for Six Prod1"
+        product.price = 16.9
+        product.provider = provider1
+        productList.append(product)
+        
+        product = Product(context: context)
+        product.id = 7
+        product.name = "Seven Product"
+        product.desc = "Small description for Seven Produ1"
+        product.price = 1.52
+        product.provider = provider2
+        productList.append(product)
+        
+        product = Product(context: context)
+        product.id = 8
+        product.name = "Eight Product"
+        product.desc = "Small description for Eight Pro1"
+        product.price = 50.7
+        product.provider = provider1
+        productList.append(product)
+        
+        product = Product(context: context)
+        product.id = 9
+        product.name = "Nine Product"
+        product.desc = "Small description for Nine Prod1"
+        product.price = 24.90
+        product.provider = provider1
+        productList.append(product)
+        
+        product = Product(context: context)
+        product.id = 10
+        product.name = "Ten Product"
+        product.desc = "Small description for Ten Produ1"
+        product.price = 31.15
         product.provider = provider2
         productList.append(product)
         
@@ -135,11 +173,27 @@ class ProductListViewController: UITableViewController {
         } catch {
             print("Error saving products \(error.localizedDescription)")
         }
+    }
+
+    // delete old providers
+    func deleteProvider(){
+        print("number of provider :")
+        let request: NSFetchRequest<Provider> = Provider.fetchRequest()
         
+        do {
+            let providerList = try context.fetch(request)
+            providerList.forEach { (provider) in
+                context.delete(provider)
+            }
+        } catch {
+            print("Error loading providers \(error.localizedDescription)")
+        }
     }
 }
 
 extension ProductListViewController: UISearchBarDelegate {
+    
+    //MARK: - searchbar on click event
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let titlePredicate = NSPredicate(format: "name CONTAINS[cd] %@", searchBar.text!)

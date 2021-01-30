@@ -11,6 +11,7 @@ class ProductViewController: UIViewController {
     
     weak var product: Product!
 
+    @IBOutlet weak var txtId: UITextField!
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtDescription: UITextView!
     @IBOutlet weak var txtProvider: UITextField!
@@ -18,10 +19,10 @@ class ProductViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        txtId.text = String(format:"%d",product.id)
         txtName.text = product.name
         txtDescription.text = product.desc
-        txtPrice.text = String(format:"%.2f",product.price)
+        txtPrice.text = String(format:"$ %.2f",product.price)
         txtProvider.text = product.provider?.name ?? ""
     }
 }
