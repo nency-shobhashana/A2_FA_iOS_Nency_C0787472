@@ -20,9 +20,8 @@ class ProductViewController: UIViewController {
         super.viewDidLoad()
 
         txtName.text = product.name
-        txtDescription.text = product.description
+        txtDescription.text = product.desc
         txtPrice.text = String(format:"%.2f",product.price)
         txtProvider.text = product.provider?.name ?? ""
-        // Do any additional setup after loading the view.
     }
 }

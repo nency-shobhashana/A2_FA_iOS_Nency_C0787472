@@ -208,6 +208,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="7oJ-DK-tkt"/>
+                    <connections>
+                        <outlet property="productSearchBar" destination="bl9-Rt-vl2" id="8t6-ZE-Kah"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w6h-hj-4Zp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
