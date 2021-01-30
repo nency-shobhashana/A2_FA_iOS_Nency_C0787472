@@ -43,6 +43,7 @@ class ProductListViewController: UITableViewController {
     //MARK: - data manipulation core data
     func loadData(with request: NSFetchRequest<Product> = Product.fetchRequest(), predicates: [NSPredicate]){
         request.predicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
+        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         do {
             productList = try context.fetch(request)
         } catch {
