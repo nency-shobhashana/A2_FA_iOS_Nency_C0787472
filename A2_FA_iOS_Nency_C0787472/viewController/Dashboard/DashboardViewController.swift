@@ -20,10 +20,15 @@ class DashboardViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        //                staticDataEntry()
+        if productList.count == 0 {
+            // add static data if product list empty(for demo purpose)
+            staticDataEntry()
+        }
         productSearchBar.delegate = self
         navigationItem.rightBarButtonItem = editButtonItem
         title = "Products"
+        
+        //MARK: - pull to refresh
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(loadData(_:)), for: .valueChanged)
         //MARK: - to dispaly first product
@@ -32,6 +37,7 @@ class DashboardViewController: UITableViewController {
         //        performSegue(withIdentifier: "productDetail", sender: self)
     }
     
+    //MARK: - toggle between Products and Providers
     @IBAction func listChangedClicked(_ sender: UIBarButtonItem) {
         isProviderShowing = !isProviderShowing
         if isProviderShowing {
@@ -77,6 +83,18 @@ class DashboardViewController: UITableViewController {
         }
     }
     
+    //MARK: - show alert for edit button
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        if editing{
+        let alert = UIAlertController(title: "Edit mode", message: "Click on product / provider to edit product / provider detail(s).", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in }))
+        
+        self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     //MARK: - tableView delegate to detect selected row
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isProviderShowing{
@@ -107,7 +125,7 @@ class DashboardViewController: UITableViewController {
     
     
     // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // transfer data between screen
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "providersProduct" {
             let destination = segue.destination as! ProvidersProductListViewController
@@ -134,6 +152,7 @@ class DashboardViewController: UITableViewController {
         }
     }
     
+    // table view delagate method for number of row going to be in table
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isProviderShowing{
             return providerList.count
@@ -142,6 +161,7 @@ class DashboardViewController: UITableViewController {
         }
     }
     
+    //create a table cell for product and provider
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if !isProviderShowing {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListViewCell", for: indexPath) as! ProductListViewCell
@@ -276,6 +296,7 @@ class DashboardViewController: UITableViewController {
 
 //MARK: - extension for all Product related methos
 extension DashboardViewController {
+    //MARK: - load products from CoreData
     func loadProductData(){
         let request: NSFetchRequest<Product> = Product.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
@@ -292,6 +313,7 @@ extension DashboardViewController {
         updateDataList()
     }
     
+    //MARK: - load filtered products from CoreData
     func filterProductData(searchText: String){
         let request: NSFetchRequest<Product> = Product.fetchRequest()
         let titlePredicate = NSPredicate(format: "name CONTAINS[cd] %@", searchText)
@@ -308,6 +330,7 @@ extension DashboardViewController {
 
 //MARK: - extension for all Provider related methos
 extension DashboardViewController {
+    //MARK: - load providers from CoreData
     func loadProviderData(){
         let request: NSFetchRequest<Provider> = Provider.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -347,6 +370,7 @@ extension DashboardViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    //MARK: - load filtered providers from CoreData
     func filterProviderData(searchText: String){
         let request: NSFetchRequest<Provider> = Provider.fetchRequest()
         let titlePredicate = NSPredicate(format: "name CONTAINS[cd] %@", searchText)
@@ -366,6 +390,7 @@ extension DashboardViewController: UISearchBarDelegate {
         filterData(searchText: searchBar.text!)
     }
     
+    // detect searchText changes
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             loadData()

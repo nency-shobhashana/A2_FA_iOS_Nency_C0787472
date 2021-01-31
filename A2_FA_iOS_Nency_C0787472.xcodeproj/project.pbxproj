@@ -68,10 +68,10 @@
 		3948D1E025C51B7B004FFA11 /* A2_FA_iOS_Nency_C0787472 */ = {
 			isa = PBXGroup;
 			children = (
+				3948D1E725C51B7B004FFA11 /* Main.storyboard */,
 				C8B1560825C561E2007AAC14 /* viewController */,
 				3948D1E125C51B7B004FFA11 /* AppDelegate.swift */,
 				3948D1E325C51B7B004FFA11 /* SceneDelegate.swift */,
-				3948D1E725C51B7B004FFA11 /* Main.storyboard */,
 				3948D1ED25C51B7D004FFA11 /* Assets.xcassets */,
 				3948D1EF25C51B7D004FFA11 /* LaunchScreen.storyboard */,
 				3948D1F225C51B7D004FFA11 /* Info.plist */,

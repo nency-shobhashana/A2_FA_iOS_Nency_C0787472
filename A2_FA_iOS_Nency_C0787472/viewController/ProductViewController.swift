@@ -49,6 +49,7 @@ class ProductViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
     }
     
+    // enable textfield for editable
     func enableEdit(){
         txtId.borderStyle = .roundedRect
         txtName.borderStyle = .roundedRect
@@ -66,6 +67,7 @@ class ProductViewController: UIViewController {
         btnSave.isHidden = false
     }
     
+    // disable textfield for editable
     func disableEdit(){
         txtId.borderStyle = .none
         txtName.borderStyle = .none
@@ -83,12 +85,14 @@ class ProductViewController: UIViewController {
         btnSave.isHidden = true
     }
     
+    // delete new product object if we have not saved in CoreData
     override func viewWillDisappear(_ animated: Bool) {
         if isEdit && product.name?.isEmpty != false {
             context.delete(product)
         }
     }
     
+    //MARK: - save data in CoreData
     @IBAction func saveClicked(_ sender: Any) {
         product.id = Int16(txtId.text ?? "0") ?? 0
         product.name = txtName.text
@@ -100,6 +104,7 @@ class ProductViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    //MARK: - get old or create a new Provider
     func getOrCreateProvider(provider: String) -> Provider{
         let request: NSFetchRequest<Provider> = Provider.fetchRequest()
         request.predicate = NSPredicate(format: "name == %@", provider)

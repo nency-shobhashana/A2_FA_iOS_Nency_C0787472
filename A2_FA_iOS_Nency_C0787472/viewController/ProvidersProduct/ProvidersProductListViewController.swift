@@ -24,6 +24,7 @@ class ProvidersProductListViewController: UITableViewController {
         
     }
     
+    //MARK: - load product data with proider name filtered from CoreData
     func loadData(){
         self.title = selectedProvider.name
         let request: NSFetchRequest<Product> = Product.fetchRequest()
@@ -38,10 +39,12 @@ class ProvidersProductListViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    // table view delegate for no of rows going to be in table
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return productList.count
     }
     
+    // table view delegate for returning table view cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProvidersProductViewCell", for: indexPath) as! ProvidersProductViewCell
         let product = productList[indexPath.row]
