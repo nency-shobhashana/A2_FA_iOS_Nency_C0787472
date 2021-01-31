@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vrY-WM-M3e">
-                                <rect key="frame" x="16" y="104" width="382" height="742"/>
+                                <rect key="frame" x="16" y="104" width="382" height="693"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUv-Ux-ylB">
                                         <rect key="frame" x="16" y="16" width="89" height="21"/>
@@ -31,7 +32,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Muk-Tj-E5G">
+                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Muk-Tj-E5G">
                                         <rect key="frame" x="16" y="114.5" width="350" height="24.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -64,15 +65,15 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hwv-UX-CD1">
+                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Provider Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hwv-UX-CD1">
                                         <rect key="frame" x="16" y="357" width="350" height="24.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i08-CC-0xc">
+                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i08-CC-0xc">
                                         <rect key="frame" x="16" y="426.5" width="350" height="24.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                     </textField>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdq-dr-gLf">
                                         <rect key="frame" x="140.5" y="484" width="101" height="34"/>
@@ -80,11 +81,14 @@
                                         <state key="normal" title="SAVE" backgroundImage="square.fill" catalog="system">
                                             <color key="titleColor" systemColor="systemGray6Color"/>
                                         </state>
+                                        <connections>
+                                            <action selector="saveClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CKU-2Z-ljR"/>
+                                        </connections>
                                     </button>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sqn-xD-You">
+                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sqn-xD-You">
                                         <rect key="frame" x="16" y="45" width="350" height="24.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -130,6 +134,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="xgW-3j-NJC"/>
                     <connections>
+                        <outlet property="btnSave" destination="Bdq-dr-gLf" id="6Z0-eu-CFt"/>
                         <outlet property="txtDescription" destination="TJX-fc-S36" id="OC0-2i-WOD"/>
                         <outlet property="txtId" destination="sqn-xD-You" id="FHU-gP-jHQ"/>
                         <outlet property="txtName" destination="Muk-Tj-E5G" id="jQ2-67-WzD"/>
@@ -144,13 +149,20 @@
         <!--Navigation Controller-->
         <scene sceneID="37P-5r-RgG">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gXY-4d-5zx" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="gXY-4d-5zx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="szh-vM-Zz7">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="szh-vM-Zz7">
+                        <rect key="frame" x="0.0" y="44" width="414" height="98"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dHZ-x9-MeH">
+                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="0Eh-ab-feL" kind="relationship" relationship="rootViewController" id="UlP-Y6-eJt"/>
                     </connections>
@@ -159,11 +171,11 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
         </scene>
-        <!--Product List View Controller-->
+        <!--Dashboard View Controller-->
         <scene sceneID="5Ho-mt-NWi">
             <objects>
-                <tableViewController id="0Eh-ab-feL" customClass="ProductListViewController" customModule="A2_FA_iOS_Nency_C0787472" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mPF-y4-1kI">
+                <tableViewController id="0Eh-ab-feL" customClass="DashboardViewController" customModule="A2_FA_iOS_Nency_C0787472" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="mPF-y4-1kI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -173,7 +185,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProductListViewCell" id="pLU-Kb-Riv" customClass="ProductListViewCell" customModule="A2_FA_iOS_Nency_C0787472" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProductListViewCell" id="pLU-Kb-Riv" customClass="ProductListViewCell" customModule="A2_FA_iOS_Nency_C0787472" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="84" width="414" height="72"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pLU-Kb-Riv" id="li3-bB-EgT">
@@ -215,7 +227,43 @@
                                     <outlet property="productName" destination="vhV-46-vnG" id="eBx-JJ-KoM"/>
                                     <outlet property="productPrice" destination="mcd-MU-5Cf" id="XIo-2u-sjw"/>
                                     <outlet property="productProvider" destination="A0r-zs-GjV" id="mrg-mB-RO7"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="productDetail" id="PuH-eo-sPV"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ProviderListViewCell" id="9cy-p8-Zer" customClass="ProviderListViewCell" customModule="A2_FA_iOS_Nency_C0787472" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="156" width="414" height="39.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9cy-p8-Zer" id="1Ne-Wo-Qfv">
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="39.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rVq-fR-BNE">
+                                            <rect key="frame" x="16" y="8" width="285" height="23.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FlA-Zx-cTw">
+                                            <rect key="frame" x="317" y="8" width="50" height="23.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="CoY-Kd-Qrg"/>
+                                            </constraints>
+                                            <color key="textColor" name="AccentColor"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="FlA-Zx-cTw" secondAttribute="trailing" constant="16" id="2uB-sC-EkA"/>
+                                        <constraint firstItem="FlA-Zx-cTw" firstAttribute="leading" secondItem="rVq-fR-BNE" secondAttribute="trailing" constant="16" id="JyS-s4-1NC"/>
+                                        <constraint firstItem="rVq-fR-BNE" firstAttribute="top" secondItem="1Ne-Wo-Qfv" secondAttribute="top" constant="8" id="MR4-It-k1P"/>
+                                        <constraint firstAttribute="bottom" secondItem="FlA-Zx-cTw" secondAttribute="bottom" constant="8" id="QWT-C3-93k"/>
+                                        <constraint firstItem="rVq-fR-BNE" firstAttribute="leading" secondItem="1Ne-Wo-Qfv" secondAttribute="leading" constant="16" id="b0q-Yu-X4n"/>
+                                        <constraint firstAttribute="bottom" secondItem="rVq-fR-BNE" secondAttribute="bottom" constant="8" id="gqL-qH-z8I"/>
+                                        <constraint firstItem="FlA-Zx-cTw" firstAttribute="top" secondItem="1Ne-Wo-Qfv" secondAttribute="top" constant="8" id="q6Z-Z9-jUn"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="productCount" destination="FlA-Zx-cTw" id="dnd-Te-AzW"/>
+                                    <outlet property="providerName" destination="rVq-fR-BNE" id="oV2-8Y-wBL"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -224,18 +272,98 @@
                             <outlet property="delegate" destination="0Eh-ab-feL" id="jqo-XE-H6u"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="7oJ-DK-tkt"/>
+                    <toolbarItems>
+                        <barButtonItem title="Show Provider" id="nsc-Bb-Mte">
+                            <connections>
+                                <action selector="listChangedClicked:" destination="0Eh-ab-feL" id="uDJ-8g-vuF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="qMf-uq-3Bs"/>
+                        <barButtonItem title="Item" image="plus.app" catalog="system" id="o5C-da-DF9">
+                            <connections>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="addProduct" id="Vmd-6B-aSH"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="7oJ-DK-tkt"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="productSearchBar" destination="bl9-Rt-vl2" id="8t6-ZE-Kah"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="editProduct" id="Bsd-zx-zSy"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="productDetail" id="4LE-v9-zhC"/>
+                        <segue destination="puw-Kn-ebe" kind="show" identifier="providersProduct" id="snh-Hr-X5H"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w6h-hj-4Zp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="115"/>
+            <point key="canvasLocation" x="883" y="115"/>
+        </scene>
+        <!--Providers Product List View Controller-->
+        <scene sceneID="Bal-sz-cM5">
+            <objects>
+                <tableViewController id="puw-Kn-ebe" customClass="ProvidersProductListViewController" customModule="A2_FA_iOS_Nency_C0787472" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="W6c-gX-s8R">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProvidersProductViewCell" id="Ukp-06-obj" customClass="ProvidersProductViewCell" customModule="A2_FA_iOS_Nency_C0787472" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ukp-06-obj" id="KjQ-jG-yxP">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Price" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aak-ps-SCg">
+                                            <rect key="frame" x="294" y="11.5" width="100" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="100" id="NEl-fS-9kX"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8gp-SW-bvC">
+                                            <rect key="frame" x="20" y="10.5" width="266" height="23"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="8gp-SW-bvC" firstAttribute="centerY" secondItem="KjQ-jG-yxP" secondAttribute="centerY" id="B0M-Yu-rf2"/>
+                                        <constraint firstItem="8gp-SW-bvC" firstAttribute="leading" secondItem="KjQ-jG-yxP" secondAttribute="leadingMargin" id="Iib-yn-Amw"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Aak-ps-SCg" secondAttribute="trailing" id="KLs-4F-sdC"/>
+                                        <constraint firstItem="Aak-ps-SCg" firstAttribute="centerY" secondItem="KjQ-jG-yxP" secondAttribute="centerY" id="PfZ-At-otx"/>
+                                        <constraint firstItem="Aak-ps-SCg" firstAttribute="leading" secondItem="8gp-SW-bvC" secondAttribute="trailing" constant="8" id="xN6-Sz-tse"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="txtName" destination="8gp-SW-bvC" id="kkG-t5-KfH"/>
+                                    <outlet property="txtPrice" destination="Aak-ps-SCg" id="zvy-MH-g82"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="puw-Kn-ebe" id="iqQ-Cc-Rjt"/>
+                            <outlet property="delegate" destination="puw-Kn-ebe" id="KVR-aE-rub"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="nxN-mV-Fsl"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pY9-G9-Ar0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="883" y="813"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="4LE-v9-zhC"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="plus.app" catalog="system" width="128" height="114"/>
         <image name="square.fill" catalog="system" width="128" height="114"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
